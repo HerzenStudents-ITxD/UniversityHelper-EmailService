@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Broker.Helpers;
-using HerzenHelper.Core.BrokerSupport.Broker;
-using HerzenHelper.Models.Broker.Requests.Email;
+using UniversityHelper.EmailService.Broker.Helpers;
+using UniversityHelper.Core.BrokerSupport.Broker;
+using UniversityHelper.Models.Broker.Requests.Email;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace HerzenHelper.EmailService.Broker.Consumers
+namespace UniversityHelper.EmailService.Broker.Consumers
 {
   public class SendEmailConsumer : IConsumer<ISendEmailRequest>
   {

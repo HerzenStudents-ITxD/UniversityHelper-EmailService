@@ -1,10 +1,10 @@
 ﻿using System;
-using HerzenHelper.EmailService.Data.Provider.MsSql.Ef;
-using HerzenHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Data.Provider.MsSql.Ef;
+using UniversityHelper.EmailService.Models.Db;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HerzenHelper.MessageService.Data.Provider.MsSql.Ef.Migrations
+namespace UniversityHelper.MessageService.Data.Provider.MsSql.Ef.Migrations
 {
   [DbContext(typeof(EmailServiceDbContext))]
   [Migration("20220127110700_InitialCreate")]

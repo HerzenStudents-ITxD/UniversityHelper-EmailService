@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Business.Commands.UnsentEmail.Interfaces;
-using HerzenHelper.EmailService.Models.Dto.Models;
-using HerzenHelper.Core.Requests;
-using HerzenHelper.Core.Responses;
+using UniversityHelper.EmailService.Business.Commands.UnsentEmail.Interfaces;
+using UniversityHelper.EmailService.Models.Dto.Models;
+using UniversityHelper.Core.Requests;
+using UniversityHelper.Core.Responses;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HerzenHelper.EmailService.Controllers
+namespace UniversityHelper.EmailService.Controllers
 {
   [Route("[controller]")]
   [ApiController]

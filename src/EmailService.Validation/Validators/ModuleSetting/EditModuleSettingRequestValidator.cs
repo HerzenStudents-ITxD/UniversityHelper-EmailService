@@ -2,13 +2,13 @@
 using System.Net.Mail;
 using FluentValidation;
 using FluentValidation.Validators;
-using HerzenHelper.EmailService.Models.Dto.Requests.ModuleSetting;
-using HerzenHelper.EmailService.Validation.Validators.ModuleSetting.Interfaces;
-using HerzenHelper.Core.Validators;
+using UniversityHelper.EmailService.Models.Dto.Requests.ModuleSetting;
+using UniversityHelper.EmailService.Validation.Validators.ModuleSetting.Interfaces;
+using UniversityHelper.Core.Validators;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using ServiceStack.FluentValidation.Validators;
 
-namespace HerzenHelper.EmailService.Validation.Validators.ModuleSetting
+namespace UniversityHelper.EmailService.Validation.Validators.ModuleSetting
 {
   //public class EditModuleSettingRequestValidator : BaseEditRequestValidator<EditModuleSettingRequest>, IEditModuleSettingRequestValidator
   //{

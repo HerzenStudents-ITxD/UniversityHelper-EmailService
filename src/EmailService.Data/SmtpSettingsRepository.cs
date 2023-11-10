@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Data.Interfaces;
-using HerzenHelper.EmailService.Data.Provider;
-using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.Core.Extensions;
+using UniversityHelper.EmailService.Data.Interfaces;
+using UniversityHelper.EmailService.Data.Provider;
+using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.Core.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
-namespace HerzenHelper.EmailService.Data
+namespace UniversityHelper.EmailService.Data
 {
   public class SmtpSettingsRepository : ISmtpSettingsRepository
   {

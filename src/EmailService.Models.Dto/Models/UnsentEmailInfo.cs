@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HerzenHelper.EmailService.Models.Dto.Models
+namespace UniversityHelper.EmailService.Models.Dto.Models
 {
   public record UnsentEmailInfo
   {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.Core.Attributes;
-using HerzenHelper.Core.Requests;
+using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.Core.Attributes;
+using UniversityHelper.Core.Requests;
 
-namespace HerzenHelper.EmailService.Data.Interfaces
+namespace UniversityHelper.EmailService.Data.Interfaces
 {
   [AutoInject]
   public interface IUnsentEmailRepository

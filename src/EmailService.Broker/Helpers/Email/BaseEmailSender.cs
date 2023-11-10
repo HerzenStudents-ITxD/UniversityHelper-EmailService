@@ -2,12 +2,12 @@
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Data.Interfaces;
-using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.EmailService.Models.Dto.Helpers;
+using UniversityHelper.EmailService.Data.Interfaces;
+using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Models.Dto.Helpers;
 using Microsoft.Extensions.Logging;
 
-namespace HerzenHelper.EmailService.Broker.Helpers
+namespace UniversityHelper.EmailService.Broker.Helpers
 {
   public abstract class BaseEmailSender
   {

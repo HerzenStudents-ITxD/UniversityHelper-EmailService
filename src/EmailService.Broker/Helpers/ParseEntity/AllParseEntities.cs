@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HerzenHelper.EmailService.Broker.Helpers.ParseEntity
+namespace UniversityHelper.EmailService.Broker.Helpers.ParseEntity
 {
   public static class AllParseEntities
   {

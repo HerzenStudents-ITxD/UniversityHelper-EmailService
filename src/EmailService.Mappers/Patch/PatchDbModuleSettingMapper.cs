@@ -1,10 +1,10 @@
-﻿using HerzenHelper.EmailService.Mappers.Patch.Interfaces;
-using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.EmailService.Models.Dto.Requests.ModuleSetting;
+﻿using UniversityHelper.EmailService.Mappers.Patch.Interfaces;
+using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Models.Dto.Requests.ModuleSetting;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 
-namespace HerzenHelper.EmailService.Mappers.Patch
+namespace UniversityHelper.EmailService.Mappers.Patch
 {
   public class PatchDbModuleSettingMapper : IPatchDbModuleSettingMapper
   {

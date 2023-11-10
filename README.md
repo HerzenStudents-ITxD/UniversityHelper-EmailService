@@ -1,2 +1,2 @@
-# HerzenHelper-EmailService
-Сервис проекта HerzenHelper для отправки писем на почту
+# UniversityHelper-EmailService
+Сервис проекта UniversityHelper для отправки писем на почту

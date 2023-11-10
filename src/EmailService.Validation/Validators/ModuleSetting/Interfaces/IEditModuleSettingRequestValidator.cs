@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using HerzenHelper.EmailService.Models.Dto.Requests.ModuleSetting;
-using HerzenHelper.Core.Attributes;
+using UniversityHelper.EmailService.Models.Dto.Requests.ModuleSetting;
+using UniversityHelper.Core.Attributes;
 using Microsoft.AspNetCore.JsonPatch;
 
-namespace HerzenHelper.EmailService.Validation.Validators.ModuleSetting.Interfaces
+namespace UniversityHelper.EmailService.Validation.Validators.ModuleSetting.Interfaces
 {
   //[AutoInject]
   //public interface IEditModuleSettingRequestValidator : IValidator<JsonPatchDocument<EditModuleSettingRequest>>

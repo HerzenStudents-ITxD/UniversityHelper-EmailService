@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HerzenHelper.EmailService.Models.Db
+namespace UniversityHelper.EmailService.Models.Db
 {
   public class DbEmail
   {

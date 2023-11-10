@@ -1,4 +1,4 @@
-﻿namespace HerzenHelper.EmailService.Models.Dto.Configurations
+﻿namespace UniversityHelper.EmailService.Models.Dto.Configurations
 {
   public class EmailEngineConfig
   {

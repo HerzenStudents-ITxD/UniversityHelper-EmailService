@@ -2,21 +2,21 @@
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Business.Commands.UnsentEmail.Interfaces;
-using HerzenHelper.EmailService.Data.Interfaces;
-using HerzenHelper.EmailService.Mappers.Models.Interfaces;
-using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.EmailService.Models.Dto.Models;
-using HerzenHelper.Core.BrokerSupport.AccessValidatorEngine.Interfaces;
-using HerzenHelper.Core.Constants;
-using HerzenHelper.Core.Enums;
-using HerzenHelper.Core.FluentValidationExtensions;
-using HerzenHelper.Core.Helpers.Interfaces;
-using HerzenHelper.Core.Requests;
-using HerzenHelper.Core.Responses;
-using HerzenHelper.Core.Validators.Interfaces;
+using UniversityHelper.EmailService.Business.Commands.UnsentEmail.Interfaces;
+using UniversityHelper.EmailService.Data.Interfaces;
+using UniversityHelper.EmailService.Mappers.Models.Interfaces;
+using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Models.Dto.Models;
+using UniversityHelper.Core.BrokerSupport.AccessValidatorEngine.Interfaces;
+using UniversityHelper.Core.Constants;
+using UniversityHelper.Core.Enums;
+using UniversityHelper.Core.FluentValidationExtensions;
+using UniversityHelper.Core.Helpers.Interfaces;
+using UniversityHelper.Core.Requests;
+using UniversityHelper.Core.Responses;
+using UniversityHelper.Core.Validators.Interfaces;
 
-namespace HerzenHelper.EmailService.Business.Commands.UnsentEmail
+namespace UniversityHelper.EmailService.Business.Commands.UnsentEmail
 {
   public class FindUnsentEmailsCommand : IFindUnsentEmailsCommand
   {

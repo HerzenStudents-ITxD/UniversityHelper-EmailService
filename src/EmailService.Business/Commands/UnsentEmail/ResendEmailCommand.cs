@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Broker.Helpers;
-using HerzenHelper.EmailService.Business.Commands.UnsentEmail.Interfaces;
-using HerzenHelper.Core.BrokerSupport.AccessValidatorEngine.Interfaces;
-using HerzenHelper.Core.Constants;
-using HerzenHelper.Core.Enums;
-using HerzenHelper.Core.Helpers.Interfaces;
-using HerzenHelper.Core.Responses;
+using UniversityHelper.EmailService.Broker.Helpers;
+using UniversityHelper.EmailService.Business.Commands.UnsentEmail.Interfaces;
+using UniversityHelper.Core.BrokerSupport.AccessValidatorEngine.Interfaces;
+using UniversityHelper.Core.Constants;
+using UniversityHelper.Core.Enums;
+using UniversityHelper.Core.Helpers.Interfaces;
+using UniversityHelper.Core.Responses;
 
-namespace HerzenHelper.EmailService.Business.Commands.UnsentEmail
+namespace UniversityHelper.EmailService.Business.Commands.UnsentEmail
 {
   public class ResendEmailCommand : IResendEmailCommand
   {

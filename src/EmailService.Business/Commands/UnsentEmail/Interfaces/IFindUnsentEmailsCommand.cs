@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using HerzenHelper.EmailService.Models.Dto.Models;
-using HerzenHelper.Core.Attributes;
-using HerzenHelper.Core.Requests;
-using HerzenHelper.Core.Responses;
+using UniversityHelper.EmailService.Models.Dto.Models;
+using UniversityHelper.Core.Attributes;
+using UniversityHelper.Core.Requests;
+using UniversityHelper.Core.Responses;
 
-namespace HerzenHelper.EmailService.Business.Commands.UnsentEmail.Interfaces
+namespace UniversityHelper.EmailService.Business.Commands.UnsentEmail.Interfaces
 {
   [AutoInject]
   public interface IFindUnsentEmailsCommand

@@ -1,4 +1,4 @@
-﻿namespace HerzenHelper.EmailService.Models.Dto.Requests.ModuleSetting
+﻿namespace UniversityHelper.EmailService.Models.Dto.Requests.ModuleSetting
 {
   public record EditModuleSettingRequest
   {

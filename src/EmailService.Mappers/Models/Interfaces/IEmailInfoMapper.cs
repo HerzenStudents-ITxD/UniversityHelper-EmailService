@@ -1,8 +1,8 @@
-﻿using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.EmailService.Models.Dto.Models;
-using HerzenHelper.Core.Attributes;
+﻿using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Models.Dto.Models;
+using UniversityHelper.Core.Attributes;
 
-namespace HerzenHelper.EmailService.Mappers.Models.Interfaces
+namespace UniversityHelper.EmailService.Mappers.Models.Interfaces
 {
   [AutoInject]
   public interface IEmailInfoMapper

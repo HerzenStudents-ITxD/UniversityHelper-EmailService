@@ -1,6 +1,6 @@
-﻿using HerzenHelper.EmailService.Models.Dto.Enums;
+﻿using UniversityHelper.EmailService.Models.Dto.Enums;
 
-namespace HerzenHelper.EmailService.Models.Dto.Requests.ParseEntity
+namespace UniversityHelper.EmailService.Models.Dto.Requests.ParseEntity
 {
   public record CreateKeywordRequest
   {

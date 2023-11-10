@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using HerzenHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Models.Db;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using HerzenHelper.Core.EFSupport.Provider;
+using UniversityHelper.Core.EFSupport.Provider;
 
-namespace HerzenHelper.EmailService.Data.Provider.MsSql.Ef
+namespace UniversityHelper.EmailService.Data.Provider.MsSql.Ef
 {
   /// <summary>
   /// A class that defines the tables and its properties in the database of MessageService.
@@ -49,7 +49,7 @@ namespace HerzenHelper.EmailService.Data.Provider.MsSql.Ef
     // Fluent API is written here.
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("HerzenHelper.EmailService.Models.Db"));
+      modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("UniversityHelper.EmailService.Models.Db"));
     }
   }
 }

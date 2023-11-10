@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HerzenHelper.Core.Attributes;
-using HerzenHelper.Core.Responses;
+using UniversityHelper.Core.Attributes;
+using UniversityHelper.Core.Responses;
 
-namespace HerzenHelper.EmailService.Business.Commands.UnsentEmail.Interfaces
+namespace UniversityHelper.EmailService.Business.Commands.UnsentEmail.Interfaces
 {
   [AutoInject]
   public interface IResendEmailCommand

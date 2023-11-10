@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("HerzenHelper.EmailService.Broker"), 
-           InternalsVisibleTo("HerzenHelper.EmailService.Business")]
-namespace HerzenHelper.EmailService.Models.Dto.Helpers
+[assembly: InternalsVisibleTo("UniversityHelper.EmailService.Broker"), 
+           InternalsVisibleTo("UniversityHelper.EmailService.Business")]
+namespace UniversityHelper.EmailService.Models.Dto.Helpers
 {
   internal static class SmtpCredentials
   {

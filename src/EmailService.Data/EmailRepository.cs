@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using HerzenHelper.EmailService.Data.Interfaces;
-using HerzenHelper.EmailService.Data.Provider;
-using HerzenHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Data.Interfaces;
+using UniversityHelper.EmailService.Data.Provider;
+using UniversityHelper.EmailService.Models.Db;
 
-namespace HerzenHelper.EmailService.Data
+namespace UniversityHelper.EmailService.Data
 {
   public class EmailRepository : IEmailRepository
   {

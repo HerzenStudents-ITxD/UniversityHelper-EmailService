@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using HerzenHelper.Core.BrokerSupport.Attributes;
-using HerzenHelper.Core.BrokerSupport.Configurations;
-using HerzenHelper.Models.Broker.Requests.Company;
-using HerzenHelper.Models.Broker.Requests.Email;
+using UniversityHelper.Core.BrokerSupport.Attributes;
+using UniversityHelper.Core.BrokerSupport.Configurations;
+using UniversityHelper.Models.Broker.Requests.Company;
+using UniversityHelper.Models.Broker.Requests.Email;
 
-namespace HerzenHelper.EmailService.Models.Dto.Configurations
+namespace UniversityHelper.EmailService.Models.Dto.Configurations
 {
   public class RabbitMqConfig : BaseRabbitMqConfig
   {

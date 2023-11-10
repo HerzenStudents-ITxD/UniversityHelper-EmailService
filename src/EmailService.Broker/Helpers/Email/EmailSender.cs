@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HerzenHelper.EmailService.Data.Interfaces;
-using HerzenHelper.EmailService.Models.Db;
+using UniversityHelper.EmailService.Data.Interfaces;
+using UniversityHelper.EmailService.Models.Db;
 using Microsoft.Extensions.Logging;
 
-namespace HerzenHelper.EmailService.Broker.Helpers
+namespace UniversityHelper.EmailService.Broker.Helpers
 {
   public class EmailSender : BaseEmailSender
   {

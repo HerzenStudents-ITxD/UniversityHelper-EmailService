@@ -1,9 +1,9 @@
 ﻿using System;
-using HerzenHelper.EmailService.Mappers.Db.Email.Interfaces;
-using HerzenHelper.EmailService.Models.Db;
-using HerzenHelper.Models.Broker.Requests.Email;
+using UniversityHelper.EmailService.Mappers.Db.Email.Interfaces;
+using UniversityHelper.EmailService.Models.Db;
+using UniversityHelper.Models.Broker.Requests.Email;
 
-namespace HerzenHelper.EmailService.Mappers.Db.Email
+namespace UniversityHelper.EmailService.Mappers.Db.Email
 {
   public class DbEmailMapper : IDbEmailMapper
   {
