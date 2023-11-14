@@ -6,19 +6,18 @@ using UniversityHelper.Core.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UniversityHelper.EmailService.Controllers
+namespace UniversityHelper.EmailService.Controllers;
+
+[Route("[controller]")]
+[ApiController]
+public class ModuleSettingController : ControllerBase
 {
-  [Route("[controller]")]
-  [ApiController]
-  public class ModuleSettingController : ControllerBase
+  [HttpPatch("edit")]
+  public async Task<OperationResultResponse<bool>> EditAsync(
+    [FromServices] IEditModuleSettingCommand command,
+    [FromQuery] Guid moduleSettingId,
+    [FromBody] JsonPatchDocument<EditModuleSettingRequest> patch)
   {
-    [HttpPatch("edit")]
-    public async Task<OperationResultResponse<bool>> EditAsync(
-      [FromServices] IEditModuleSettingCommand command,
-      [FromQuery] Guid moduleSettingId,
-      [FromBody] JsonPatchDocument<EditModuleSettingRequest> patch)
-    {
-      return await command.ExecuteAsync(moduleSettingId, patch);
-    }
+    return await command.ExecuteAsync(moduleSettingId, patch);
   }
 }

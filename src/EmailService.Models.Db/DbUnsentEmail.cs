@@ -2,34 +2,33 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace UniversityHelper.EmailService.Models.Db
+namespace UniversityHelper.EmailService.Models.Db;
+
+public class DbUnsentEmail
 {
-  public class DbUnsentEmail
+  public const string TableName = "UnsentEmails";
+
+  public Guid Id { get; set; }
+  public Guid EmailId { get; set; }
+  public DateTime CreatedAtUtc { get; set; }
+  public DateTime LastSendAtUtc { get; set; }
+  public uint TotalSendingCount { get; set; }
+
+  public DbEmail Email { get; set; }
+}
+
+public class DbUnsentEmailConfiguration : IEntityTypeConfiguration<DbUnsentEmail>
+{
+  public void Configure(EntityTypeBuilder<DbUnsentEmail> builder)
   {
-    public const string TableName = "UnsentEmails";
+    builder
+      .ToTable(DbUnsentEmail.TableName);
 
-    public Guid Id { get; set; }
-    public Guid EmailId { get; set; }
-    public DateTime CreatedAtUtc { get; set; }
-    public DateTime LastSendAtUtc { get; set; }
-    public uint TotalSendingCount { get; set; }
+    builder
+      .HasKey(ue => ue.Id);
 
-    public DbEmail Email { get; set; }
-  }
-
-  public class DbUnsentEmailConfiguration : IEntityTypeConfiguration<DbUnsentEmail>
-  {
-    public void Configure(EntityTypeBuilder<DbUnsentEmail> builder)
-    {
-      builder
-        .ToTable(DbUnsentEmail.TableName);
-
-      builder
-        .HasKey(ue => ue.Id);
-
-      builder
-        .HasOne(ue => ue.Email)
-        .WithOne(e => e.UnsentEmail);
-    }
+    builder
+      .HasOne(ue => ue.Email)
+      .WithOne(e => e.UnsentEmail);
   }
 }

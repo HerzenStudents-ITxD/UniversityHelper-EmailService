@@ -4,74 +4,73 @@ using UniversityHelper.EmailService.Data.Interfaces;
 using UniversityHelper.EmailService.Models.Db;
 using Microsoft.Extensions.Logging;
 
-namespace UniversityHelper.EmailService.Broker.Helpers
-{
-  public class EmailSender : BaseEmailSender
-  {
-    private readonly IEmailRepository _emailRepository;
-    private readonly IUnsentEmailRepository _unsentEmailRepository;
+namespace UniversityHelper.EmailService.Broker.Helpers;
 
-    public EmailSender(
-      ILogger<EmailSender> logger,
-      ISmtpSettingsRepository getSmtpCredentials,
-      IEmailRepository emailRepository,
-      IUnsentEmailRepository unsentEmailRepository)
-    : base(getSmtpCredentials, logger)
+public class EmailSender : BaseEmailSender
+{
+  private readonly IEmailRepository _emailRepository;
+  private readonly IUnsentEmailRepository _unsentEmailRepository;
+
+  public EmailSender(
+    ILogger<EmailSender> logger,
+    ISmtpSettingsRepository getSmtpCredentials,
+    IEmailRepository emailRepository,
+    IUnsentEmailRepository unsentEmailRepository)
+  : base(getSmtpCredentials, logger)
+  {
+    _emailRepository = emailRepository;
+    _unsentEmailRepository = unsentEmailRepository;
+  }
+
+  public async Task<bool> SendEmailAsync(
+    string receiver,
+    string subject,
+    string text,
+    Guid? senderId = null)
+  {
+    DbEmail dbEmail = new()
     {
-      _emailRepository = emailRepository;
-      _unsentEmailRepository = unsentEmailRepository;
+      Id = Guid.NewGuid(),
+      SenderId = senderId,
+      Receiver = receiver,
+      Subject = subject,
+      Text = text,
+      CreatedAtUtc = DateTime.UtcNow
+    };
+
+    await _emailRepository.SaveEmailAsync(dbEmail);
+
+    if (await SendAsync(dbEmail))
+    {
+      return true;
     }
 
-    public async Task<bool> SendEmailAsync(
-      string receiver,
-      string subject,
-      string text,
-      Guid? senderId = null)
-    {
-      DbEmail dbEmail = new()
+    await _unsentEmailRepository.CreateAsync(
+      new DbUnsentEmail
       {
         Id = Guid.NewGuid(),
-        SenderId = senderId,
-        Receiver = receiver,
-        Subject = subject,
-        Text = text,
-        CreatedAtUtc = DateTime.UtcNow
-      };
+        CreatedAtUtc = dbEmail.CreatedAtUtc,
+        LastSendAtUtc = dbEmail.CreatedAtUtc,
+        EmailId = dbEmail.Id,
+        TotalSendingCount = 1
+      });
 
-      await _emailRepository.SaveEmailAsync(dbEmail);
+    return false;
+  }
 
-      if (await SendAsync(dbEmail))
-      {
-        return true;
-      }
+  public async Task<bool> ResendEmail(Guid unsentEmailId)
+  {
+    DbUnsentEmail dbUnsentEmail = await _unsentEmailRepository.GetAsync(unsentEmailId);
 
-      await _unsentEmailRepository.CreateAsync(
-        new DbUnsentEmail
-        {
-          Id = Guid.NewGuid(),
-          CreatedAtUtc = dbEmail.CreatedAtUtc,
-          LastSendAtUtc = dbEmail.CreatedAtUtc,
-          EmailId = dbEmail.Id,
-          TotalSendingCount = 1
-        });
-
-      return false;
-    }
-
-    public async Task<bool> ResendEmail(Guid unsentEmailId)
+    if (await SendAsync(dbUnsentEmail.Email))
     {
-      DbUnsentEmail dbUnsentEmail = await _unsentEmailRepository.GetAsync(unsentEmailId);
+      await _unsentEmailRepository.RemoveAsync(dbUnsentEmail);
 
-      if (await SendAsync(dbUnsentEmail.Email))
-      {
-        await _unsentEmailRepository.RemoveAsync(dbUnsentEmail);
-
-        return true;
-      }
-
-      await _unsentEmailRepository.IncrementTotalCountAsync(dbUnsentEmail);
-
-      return false;
+      return true;
     }
+
+    await _unsentEmailRepository.IncrementTotalCountAsync(dbUnsentEmail);
+
+    return false;
   }
 }

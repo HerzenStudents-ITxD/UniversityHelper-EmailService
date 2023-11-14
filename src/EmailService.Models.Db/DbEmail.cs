@@ -2,47 +2,46 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace UniversityHelper.EmailService.Models.Db
+namespace UniversityHelper.EmailService.Models.Db;
+
+public class DbEmail
 {
-  public class DbEmail
+  public const string TableName = "Emails";
+
+  public Guid Id { get; set; }
+  public Guid? SenderId { get; set; }
+  public string Receiver { get; set; }
+  public string Subject { get; set; }
+  public string Text { get; set; }
+  public DateTime CreatedAtUtc { get; set; }
+
+  public DbUnsentEmail UnsentEmail { get; set; }
+}
+
+public class DbEmailConfiguration : IEntityTypeConfiguration<DbEmail>
+{
+  public void Configure(EntityTypeBuilder<DbEmail> builder)
   {
-    public const string TableName = "Emails";
+    builder
+      .ToTable(DbEmail.TableName);
 
-    public Guid Id { get; set; }
-    public Guid? SenderId { get; set; }
-    public string Receiver { get; set; }
-    public string Subject { get; set; }
-    public string Text { get; set; }
-    public DateTime CreatedAtUtc { get; set; }
+    builder
+      .HasKey(e => e.Id);
 
-    public DbUnsentEmail UnsentEmail { get; set; }
-  }
+    builder
+      .Property(e => e.Receiver)
+      .IsRequired();
 
-  public class DbEmailConfiguration : IEntityTypeConfiguration<DbEmail>
-  {
-    public void Configure(EntityTypeBuilder<DbEmail> builder)
-    {
-      builder
-        .ToTable(DbEmail.TableName);
+    builder
+      .Property(e => e.Subject)
+      .IsRequired();
 
-      builder
-        .HasKey(e => e.Id);
+    builder
+      .Property(e => e.Text)
+      .IsRequired();
 
-      builder
-        .Property(e => e.Receiver)
-        .IsRequired();
-
-      builder
-        .Property(e => e.Subject)
-        .IsRequired();
-
-      builder
-        .Property(e => e.Text)
-        .IsRequired();
-
-      builder
-        .HasOne(e => e.UnsentEmail)
-        .WithOne(ue => ue.Email);
-    }
+    builder
+      .HasOne(e => e.UnsentEmail)
+      .WithOne(ue => ue.Email);
   }
 }

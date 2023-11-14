@@ -2,11 +2,10 @@
 using UniversityHelper.EmailService.Models.Dto.Models;
 using UniversityHelper.Core.Attributes;
 
-namespace UniversityHelper.EmailService.Mappers.Models.Interfaces
+namespace UniversityHelper.EmailService.Mappers.Models.Interfaces;
+
+[AutoInject]
+public interface IEmailInfoMapper
 {
-  [AutoInject]
-  public interface IEmailInfoMapper
-  {
-    EmailInfo Map(DbEmail dbEmail);
-  }
+  EmailInfo Map(DbEmail dbEmail);
 }

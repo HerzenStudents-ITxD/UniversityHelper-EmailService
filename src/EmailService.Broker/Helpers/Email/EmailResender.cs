@@ -5,41 +5,40 @@ using UniversityHelper.EmailService.Data.Interfaces;
 using UniversityHelper.EmailService.Models.Db;
 using Microsoft.Extensions.Logging;
 
-namespace UniversityHelper.EmailService.Broker.Helpers
+namespace UniversityHelper.EmailService.Broker.Helpers;
+
+public class EmailResender : BaseEmailSender
 {
-  public class EmailResender : BaseEmailSender
+  private readonly IUnsentEmailRepository _unsentEmailRepository;
+
+  public async Task StartResend(int intervalInMinutes, int maxResendingCount)
   {
-    private readonly IUnsentEmailRepository _unsentEmailRepository;
-
-    public async Task StartResend(int intervalInMinutes, int maxResendingCount)
+    while (true)
     {
-      while (true)
+      List<DbUnsentEmail> unsentEmails = await _unsentEmailRepository.GetAllAsync(maxResendingCount);
+
+      foreach (var email in unsentEmails)
       {
-        List<DbUnsentEmail> unsentEmails = await _unsentEmailRepository.GetAllAsync(maxResendingCount);
-
-        foreach (var email in unsentEmails)
+        if (await SendAsync(email.Email))
         {
-          if (await SendAsync(email.Email))
-          {
-            await _unsentEmailRepository.RemoveAsync(email);
-          }
-          else
-          {
-            await _unsentEmailRepository.IncrementTotalCountAsync(email);
-          }
+          await _unsentEmailRepository.RemoveAsync(email);
         }
-
-        await Task.Delay(TimeSpan.FromMinutes(intervalInMinutes));
+        else
+        {
+          await _unsentEmailRepository.IncrementTotalCountAsync(email);
+        }
       }
-    }
 
-    public EmailResender(
-      IUnsentEmailRepository unsentEmailRepository,
-      ILogger<EmailResender> logger,
-      ISmtpSettingsRepository getSmtpCredentials)
-    : base(getSmtpCredentials, logger)
-    {
-      _unsentEmailRepository = unsentEmailRepository;
+      await Task.Delay(TimeSpan.FromMinutes(intervalInMinutes));
     }
+  }
+
+  public EmailResender(
+    IUnsentEmailRepository unsentEmailRepository,
+    ILogger<EmailResender> logger,
+    ISmtpSettingsRepository getSmtpCredentials)
+  : base(getSmtpCredentials, logger)
+  {
+    _unsentEmailRepository = unsentEmailRepository;
   }
 }

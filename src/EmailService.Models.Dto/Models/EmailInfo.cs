@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace UniversityHelper.EmailService.Models.Dto.Models
+namespace UniversityHelper.EmailService.Models.Dto.Models;
+
+public record EmailInfo
 {
-  public record EmailInfo
-  {
-    public Guid Id { get; set; }
-    public string Receiver { get; set; }
-    public string Subject { get; set; }
-    public string Body { get; set; }
-  }
+  public Guid Id { get; set; }
+  public string Receiver { get; set; }
+  public string Subject { get; set; }
+  public string Body { get; set; }
 }

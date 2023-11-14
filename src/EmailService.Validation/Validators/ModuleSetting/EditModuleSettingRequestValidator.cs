@@ -8,112 +8,111 @@ using UniversityHelper.Core.Validators;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using ServiceStack.FluentValidation.Validators;
 
-namespace UniversityHelper.EmailService.Validation.Validators.ModuleSetting
-{
-  //public class EditModuleSettingRequestValidator : BaseEditRequestValidator<EditModuleSettingRequest>, IEditModuleSettingRequestValidator
-  //{
-  //  private void HandleInternalPropertyValidation(Operation<EditModuleSettingRequest> requestedOperation, CustomContext context)
-  //  {
-  //    Context = context;
-  //    RequestedOperation = requestedOperation;
+namespace UniversityHelper.EmailService.Validation.Validators.ModuleSetting;
 
-  //    #region Paths
+//public class EditModuleSettingRequestValidator : BaseEditRequestValidator<EditModuleSettingRequest>, IEditModuleSettingRequestValidator
+//{
+//  private void HandleInternalPropertyValidation(Operation<EditModuleSettingRequest> requestedOperation, CustomContext context)
+//  {
+//    Context = context;
+//    RequestedOperation = requestedOperation;
 
-  //    AddCorrectPaths(
-  //      new List<string>
-  //      {
-  //        nameof(EditModuleSettingRequest.Host),
-  //        nameof(EditModuleSettingRequest.Port),
-  //        nameof(EditModuleSettingRequest.EnableSsl),
-  //        nameof(EditModuleSettingRequest.Email),
-  //        nameof(EditModuleSettingRequest.Password)
-  //      });
+//    #region Paths
 
-  //    AddCorrectOperations(nameof(EditModuleSettingRequest.Host), new List<OperationType> { OperationType.Replace });
-  //    AddCorrectOperations(nameof(EditModuleSettingRequest.Port), new List<OperationType> { OperationType.Replace });
-  //    AddCorrectOperations(nameof(EditModuleSettingRequest.EnableSsl), new List<OperationType> { OperationType.Replace });
-  //    AddCorrectOperations(nameof(EditModuleSettingRequest.Email), new List<OperationType> { OperationType.Replace });
-  //    AddCorrectOperations(nameof(EditModuleSettingRequest.Password), new List<OperationType> { OperationType.Replace });
+//    AddCorrectPaths(
+//      new List<string>
+//      {
+//        nameof(EditModuleSettingRequest.Host),
+//        nameof(EditModuleSettingRequest.Port),
+//        nameof(EditModuleSettingRequest.EnableSsl),
+//        nameof(EditModuleSettingRequest.Email),
+//        nameof(EditModuleSettingRequest.Password)
+//      });
 
-  //    #endregion
+//    AddCorrectOperations(nameof(EditModuleSettingRequest.Host), new List<OperationType> { OperationType.Replace });
+//    AddCorrectOperations(nameof(EditModuleSettingRequest.Port), new List<OperationType> { OperationType.Replace });
+//    AddCorrectOperations(nameof(EditModuleSettingRequest.EnableSsl), new List<OperationType> { OperationType.Replace });
+//    AddCorrectOperations(nameof(EditModuleSettingRequest.Email), new List<OperationType> { OperationType.Replace });
+//    AddCorrectOperations(nameof(EditModuleSettingRequest.Password), new List<OperationType> { OperationType.Replace });
 
-  //    #region Host
+//    #endregion
 
-  //    AddFailureForPropertyIfNot(
-  //      nameof(EditModuleSettingRequest.Host),
-  //      x => x == OperationType.Replace,
-  //      new()
-  //      {
-  //        { x => !string.IsNullOrWhiteSpace(x.value?.ToString()), "Host must not be empty." },
-  //      });
+//    #region Host
 
-  //    #endregion
+//    AddFailureForPropertyIfNot(
+//      nameof(EditModuleSettingRequest.Host),
+//      x => x == OperationType.Replace,
+//      new()
+//      {
+//        { x => !string.IsNullOrWhiteSpace(x.value?.ToString()), "Host must not be empty." },
+//      });
 
-  //    #region Port
+//    #endregion
 
-  //    AddFailureForPropertyIfNot(
-  //      nameof(EditModuleSettingRequest.Port),
-  //      x => x == OperationType.Replace,
-  //      new()
-  //      {
-  //        { x => int.TryParse(x.value?.ToString(), out int _), "Incorrect format of Port." },
-  //      });
+//    #region Port
 
-  //    #endregion
+//    AddFailureForPropertyIfNot(
+//      nameof(EditModuleSettingRequest.Port),
+//      x => x == OperationType.Replace,
+//      new()
+//      {
+//        { x => int.TryParse(x.value?.ToString(), out int _), "Incorrect format of Port." },
+//      });
 
-  //    #region EnableSsl
+//    #endregion
 
-  //    AddFailureForPropertyIfNot(
-  //      nameof(EditModuleSettingRequest.EnableSsl),
-  //      x => x == OperationType.Replace,
-  //      new()
-  //      {
-  //        { x => bool.TryParse(x.value?.ToString(), out bool _), "Incorrect format of EnableSsl." },
-  //      });
+//    #region EnableSsl
 
-  //    #endregion
+//    AddFailureForPropertyIfNot(
+//      nameof(EditModuleSettingRequest.EnableSsl),
+//      x => x == OperationType.Replace,
+//      new()
+//      {
+//        { x => bool.TryParse(x.value?.ToString(), out bool _), "Incorrect format of EnableSsl." },
+//      });
 
-  //    #region Email
+//    #endregion
 
-  //    AddFailureForPropertyIfNot(
-  //      nameof(EditModuleSettingRequest.Email),
-  //      x => x == OperationType.Replace,
-  //      new()
-  //      {
-  //        { x =>
-  //          {
-  //            try
-  //            {
-  //              MailAddress address = new(x.value?.ToString().Trim());
-  //              return true;
-  //            }
-  //            catch
-  //            {
-  //              return false;
-  //            }
-  //          }, "Incorrect email address."
-  //        },
-  //      });
+//    #region Email
 
-  //    #endregion
+//    AddFailureForPropertyIfNot(
+//      nameof(EditModuleSettingRequest.Email),
+//      x => x == OperationType.Replace,
+//      new()
+//      {
+//        { x =>
+//          {
+//            try
+//            {
+//              MailAddress address = new(x.value?.ToString().Trim());
+//              return true;
+//            }
+//            catch
+//            {
+//              return false;
+//            }
+//          }, "Incorrect email address."
+//        },
+//      });
 
-  //    #region Password
+//    #endregion
 
-  //    AddFailureForPropertyIfNot(
-  //      nameof(EditModuleSettingRequest.Password),
-  //      x => x == OperationType.Replace,
-  //      new()
-  //      {
-  //        { x => !string.IsNullOrWhiteSpace(x.value?.ToString()), "Password must not be empty." },
-  //      });
+//    #region Password
 
-  //    #endregion
-  //  }
+//    AddFailureForPropertyIfNot(
+//      nameof(EditModuleSettingRequest.Password),
+//      x => x == OperationType.Replace,
+//      new()
+//      {
+//        { x => !string.IsNullOrWhiteSpace(x.value?.ToString()), "Password must not be empty." },
+//      });
 
-  //  public EditModuleSettingRequestValidator()
-  //  {
-  //    RuleForEach(x => x.Operations)
-  //      .Custom(HandleInternalPropertyValidation);
-  //  }
-  //}
-}
+//    #endregion
+//  }
+
+//  public EditModuleSettingRequestValidator()
+//  {
+//    RuleForEach(x => x.Operations)
+//      .Custom(HandleInternalPropertyValidation);
+//  }
+//}

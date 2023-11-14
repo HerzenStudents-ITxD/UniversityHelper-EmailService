@@ -5,21 +5,20 @@ using UniversityHelper.EmailService.Models.Db;
 using UniversityHelper.Core.Attributes;
 using UniversityHelper.Core.Requests;
 
-namespace UniversityHelper.EmailService.Data.Interfaces
+namespace UniversityHelper.EmailService.Data.Interfaces;
+
+[AutoInject]
+public interface IUnsentEmailRepository
 {
-  [AutoInject]
-  public interface IUnsentEmailRepository
-  {
-    Task CreateAsync(DbUnsentEmail email);
+  Task CreateAsync(DbUnsentEmail email);
 
-    Task<DbUnsentEmail> GetAsync(Guid id);
+  Task<DbUnsentEmail> GetAsync(Guid id);
 
-    Task<List<DbUnsentEmail>> GetAllAsync(int totalSendingCountIsLessThen);
+  Task<List<DbUnsentEmail>> GetAllAsync(int totalSendingCountIsLessThen);
 
-    Task<(List<DbUnsentEmail> unsentEmailes, int totalCount)> FindAsync(BaseFindFilter filter);
+  Task<(List<DbUnsentEmail> unsentEmailes, int totalCount)> FindAsync(BaseFindFilter filter);
 
-    Task<bool> RemoveAsync(DbUnsentEmail email);
+  Task<bool> RemoveAsync(DbUnsentEmail email);
 
-    Task IncrementTotalCountAsync(DbUnsentEmail email);
-  }
+  Task IncrementTotalCountAsync(DbUnsentEmail email);
 }

@@ -2,11 +2,10 @@
 using UniversityHelper.Core.Attributes;
 using UniversityHelper.Models.Broker.Requests.Email;
 
-namespace UniversityHelper.EmailService.Mappers.Db.Email.Interfaces
+namespace UniversityHelper.EmailService.Mappers.Db.Email.Interfaces;
+
+[AutoInject]
+public interface IDbEmailMapper
 {
-  [AutoInject]
-  public interface IDbEmailMapper
-  {
-    DbEmail Map(ISendEmailRequest request);
-  }
+  DbEmail Map(ISendEmailRequest request);
 }

@@ -2,11 +2,10 @@
 using UniversityHelper.EmailService.Models.Db;
 using UniversityHelper.Core.Attributes;
 
-namespace UniversityHelper.EmailService.Data.Interfaces
+namespace UniversityHelper.EmailService.Data.Interfaces;
+
+[AutoInject]
+public interface IEmailRepository
 {
-  [AutoInject]
-  public interface IEmailRepository
-  {
-    Task SaveEmailAsync(DbEmail dbEmail);
-  }
+  Task SaveEmailAsync(DbEmail dbEmail);
 }

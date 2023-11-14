@@ -8,68 +8,67 @@ using UniversityHelper.EmailService.Models.Db;
 using UniversityHelper.Core.Requests;
 using Microsoft.EntityFrameworkCore;
 
-namespace UniversityHelper.EmailService.Data
+namespace UniversityHelper.EmailService.Data;
+
+public class UnsentEmailRepository : IUnsentEmailRepository
 {
-  public class UnsentEmailRepository : IUnsentEmailRepository
+  private readonly IDataProvider _provider;
+
+  public UnsentEmailRepository(
+    IDataProvider provider)
   {
-    private readonly IDataProvider _provider;
+    _provider = provider;
+  }
 
-    public UnsentEmailRepository(
-      IDataProvider provider)
-    {
-      _provider = provider;
-    }
+  public async Task CreateAsync(DbUnsentEmail email)
+  {
+    _provider.UnsentEmails.Add(email);
+    await _provider.SaveAsync();
+  }
 
-    public async Task CreateAsync(DbUnsentEmail email)
-    {
-      _provider.UnsentEmails.Add(email);
-      await _provider.SaveAsync();
-    }
+  public async Task<DbUnsentEmail> GetAsync(Guid id)
+  {
+    return await _provider.UnsentEmails
+      .Include(x => x.Email)
+      .FirstOrDefaultAsync(eu => eu.Id == id);
+  }
 
-    public async Task<DbUnsentEmail> GetAsync(Guid id)
-    {
-      return await _provider.UnsentEmails
-        .Include(x => x.Email)
-        .FirstOrDefaultAsync(eu => eu.Id == id);
-    }
+  public async Task<List<DbUnsentEmail>> GetAllAsync(int totalSendingCountIsLessThen)
+  {
+    return await _provider.UnsentEmails
+      .Where(u => u.TotalSendingCount < totalSendingCountIsLessThen)
+      .Include(u => u.Email)
+      .ToListAsync();
+  }
 
-    public async Task<List<DbUnsentEmail>> GetAllAsync(int totalSendingCountIsLessThen)
-    {
-      return await _provider.UnsentEmails
-        .Where(u => u.TotalSendingCount < totalSendingCountIsLessThen)
+  public async Task<(List<DbUnsentEmail> unsentEmailes, int totalCount)> FindAsync(BaseFindFilter filter)
+  {
+    return (
+      await _provider.UnsentEmails
         .Include(u => u.Email)
-        .ToListAsync();
-    }
+        .Skip(filter.SkipCount)
+        .Take(filter.TakeCount)
+        .ToListAsync(),
+      await _provider.UnsentEmails.CountAsync());
+  }
 
-    public async Task<(List<DbUnsentEmail> unsentEmailes, int totalCount)> FindAsync(BaseFindFilter filter)
+  public async Task<bool> RemoveAsync(DbUnsentEmail email)
+  {
+    if (email == null)
     {
-      return (
-        await _provider.UnsentEmails
-          .Include(u => u.Email)
-          .Skip(filter.SkipCount)
-          .Take(filter.TakeCount)
-          .ToListAsync(),
-        await _provider.UnsentEmails.CountAsync());
+      return false;
     }
 
-    public async Task<bool> RemoveAsync(DbUnsentEmail email)
-    {
-      if (email == null)
-      {
-        return false;
-      }
+    _provider.UnsentEmails.Remove(email);
+    await _provider.SaveAsync();
 
-      _provider.UnsentEmails.Remove(email);
-      await _provider.SaveAsync();
+    return true;
+  }
 
-      return true;
-    }
-
-    public async Task IncrementTotalCountAsync(DbUnsentEmail email)
-    {
-      email.TotalSendingCount++;
-      email.LastSendAtUtc = DateTime.UtcNow;
-      await _provider.SaveAsync();
-    }
+  public async Task IncrementTotalCountAsync(DbUnsentEmail email)
+  {
+    email.TotalSendingCount++;
+    email.LastSendAtUtc = DateTime.UtcNow;
+    await _provider.SaveAsync();
   }
 }

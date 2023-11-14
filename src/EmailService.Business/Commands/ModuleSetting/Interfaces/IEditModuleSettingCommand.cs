@@ -5,13 +5,12 @@ using UniversityHelper.Core.Attributes;
 using UniversityHelper.Core.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 
-namespace UniversityHelper.EmailService.Business.Commands.ModuleSetting.Interfaces
+namespace UniversityHelper.EmailService.Business.Commands.ModuleSetting.Interfaces;
+
+[AutoInject]
+public interface IEditModuleSettingCommand
 {
-  [AutoInject]
-  public interface IEditModuleSettingCommand
-  {
-    Task<OperationResultResponse<bool>> ExecuteAsync(
-      Guid moduleSettingId,
-      JsonPatchDocument<EditModuleSettingRequest> patch);
-  }
+  Task<OperationResultResponse<bool>> ExecuteAsync(
+    Guid moduleSettingId,
+    JsonPatchDocument<EditModuleSettingRequest> patch);
 }
