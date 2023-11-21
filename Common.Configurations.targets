@@ -32,6 +32,7 @@
   <ItemGroup Condition="$(AssemblyName.Contains('.UnitTests')) != 'true'">
     <PackageReference Include="UniversityHelper.Core" Version="2.0.2" />
     <PackageReference Include="UniversityHelper.Core.BrokerSupport" Version="2.0.2" />
+    <PackageReference Include="UniversityHelper.Core.RedisSupport" Version="2.0.2" />
     <PackageReference Include="UniversityHelper.Models" Version="2.0.2" />
   </ItemGroup>
 

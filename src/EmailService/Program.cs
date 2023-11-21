@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 
-namespace UniversityHelper.AnalyticsService;
+namespace UniversityHelper.EmailService;
 
 public class Program
 {
@@ -28,7 +28,7 @@ public class Program
 
     Log.Logger = new LoggerConfiguration().ReadFrom
         .Configuration(configuration)
-        .Enrich.WithProperty("Service", "AnalyticsService")
+        .Enrich.WithProperty("Service", "EmailService")
         .WriteTo.Seq(
             serverUrl: seqServerUrl,
             apiKey: seqApiKey)
@@ -40,7 +40,7 @@ public class Program
     }
     catch (Exception exc)
     {
-      Log.Fatal(exc, "Can not properly start AnalyticsService.");
+      Log.Fatal(exc, "Can not properly start EmailService.");
     }
     finally
     {

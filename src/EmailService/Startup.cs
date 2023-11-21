@@ -15,8 +15,8 @@ using UniversityHelper.Core.RedisSupport.Configurations;
 using UniversityHelper.Core.RedisSupport.Constants;
 using UniversityHelper.Core.RedisSupport.Helpers;
 using UniversityHelper.Core.RedisSupport.Helpers.Interfaces;
-using UniversityHelper.AnalyticsService.Data.Provider.MsSql.Ef;
-using UniversityHelper.AnalyticsService.Models.Dto.Configurations;
+using UniversityHelper.EmailService.Data.Provider.MsSql.Ef;
+using UniversityHelper.EmailService.Models.Dto.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +24,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
-namespace UniversityHelper.AnalyticsService;
+namespace UniversityHelper.EmailService;
 
 public class Startup : BaseApiInfo
 {
@@ -52,7 +53,7 @@ public class Startup : BaseApiInfo
 
     //App.Release.BreakChange.Version
     Version = "2.0.2.0";
-    Description = "AnalyticsService is an API intended to work with the user rights.";
+    Description = "EmailService is an API intended to work with the user rights.";
     StartTime = DateTime.UtcNow;
     ApiName = $"UniversityHelper - {_serviceInfoConfig.Name}";
   }
@@ -87,7 +88,7 @@ public class Startup : BaseApiInfo
 
     string dbConnectionString = ConnectionStringHandler.Get(Configuration);
 
-    services.AddDbContext<AnalyticsServiceDbContext>(options =>
+    services.AddDbContext<EmailServiceDbContext>(options =>
     {
       options.UseSqlServer(dbConnectionString);
     });
@@ -128,11 +129,23 @@ public class Startup : BaseApiInfo
       .AddHealthChecks()
       .AddSqlServer(dbConnectionString)
       .AddRabbitMqCheck();
+
+    services.AddSwaggerGen(options =>
+    {
+      options.SwaggerDoc($"{Version}", new OpenApiInfo
+      {
+        Version = Version,
+        Title = _serviceInfoConfig.Name,
+        Description = Description
+      });
+
+      options.EnableAnnotations();
+    });
   }
 
   public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
   {
-    app.UpdateDatabase<AnalyticsServiceDbContext>();
+    app.UpdateDatabase<EmailServiceDbContext>();
 
     FlushRedisDbHelper.FlushDatabase(_redisConnStr, Cache.Rights);
 
@@ -164,5 +177,11 @@ public class Startup : BaseApiInfo
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
       });
     });
+
+    app.UseSwagger()
+      .UseSwaggerUI(options =>
+      {
+        options.SwaggerEndpoint($"/swagger/{Version}/swagger.json", $"{Version}");
+      });
   }
 }
